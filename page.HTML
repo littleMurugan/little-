@@ -1,0 +1,145 @@
+<html>
+<head>
+  <!-- Add some styling to the form -->
+  <style>
+    form {
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+      border: 1px solid rgb(235, 0, 0);
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgb(240, 255, 142);
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: rgb(0, 255, 255);
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .alert {
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      display: none; /* Hide the alert by default */
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+
+  <!-- Add some JavaScript to validate the form -->
+  <script>
+    function validateForm() {
+      // Get all the input fields and the select element
+      var inputs = document.getElementsByTagName("input");
+      var select = document.getElementById("course");
+
+      // Check if the name field is empty
+      if (inputs[0].value == "") {
+        // If it is, display an alert message and set the focus to the name field
+        document.getElementById("alert").innerHTML = "Please enter your name!";
+        document.getElementById("alert").style.display = "block";
+        inputs[0].focus();
+        return false;
+      }
+      // Check if the age field is empty or not a number
+      if (inputs[1].value == "" || isNaN(inputs[1].value)) {
+        // If it is, display an alert message and set the focus to the age field
+        document.getElementById("alert").innerHTML = "Please enter a valid age!";
+        document.getElementById("alert").style.display = "block";
+        inputs[1].focus();
+        return false;
+      }
+
+      // Check if the email field is empty or not a valid email address
+      if (inputs[2].value == "" || !inputs[2].value.includes("@")) {
+        // If it is, display an alert message and set the focus to the email field
+        document.getElementById("alert").innerHTML = "Please enter a valid email address!";
+        document.getElementById("alert").style.display = "block";
+        inputs[2].focus();
+        return false;
+      }
+
+      // Check if the course field is empty
+      if (select.value == "") {
+        // If it is, display an alert message and set the focus to the course field
+        document.getElementById("alert").innerHTML = "Please select a course!";
+        document.getElementById("alert").style.display = "block";
+        select.focus();
+        return false;
+      }
+
+      // If all fields are valid, submit the form
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <!-- Create the form -->
+  <form action="process_form.php" method="post" onsubmit="return validateForm()">
+    <!-- Add a name field -->
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+
+    <!-- Add an age field -->
+    <label for="age">Age:</label><br>
+    <input type="text" id="age" name="age"><br>
+
+    <!-- Add an email field -->
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br>
+
+    <!-- Add a course select field -->
+    <label for="course">Course:</label><br>
+    <select id="course" name="course">
+      <option value=""></option>
+      <option value="web_design">Web Design</option>
+      <option value="app_dev">App Development</option>
+      <option value="software_dev">Software Development</option>
+      <option value="cyber_security">Cyber Security</option>
+      <option value="editing">Editing</option>
+    </select><br>
+
+    <!-- Add a field for the user to select their level of knowledge -->
+    <label for="knowledge">Level of Knowledge:</label><br>
+    <input type="radio" id="little_bit" name="knowledge" value="little_bit">
+    <label for="little_bit">A little bit</label><br>
+    <input type="radio" id="some" name="knowledge" value="some">
+    <label for="some">Some</label><br>
+    <input type="radio" id="beginner" name="knowledge" value="beginner">
+    <label for="beginner">Beginner</label><br>
+    <input type="radio" id="pro" name="knowledge" value="pro">
+    <label for="pro">Pro</label><br>
+
+    <!-- Add a submit button -->
+    <input type="submit" value="Submit">
+  </form>
+
+  <!-- Add an alert message for form validation errors -->
+  <div class="alert" id="alert"></div>
+</body>
+</html>
+
